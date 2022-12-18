@@ -1,8 +1,11 @@
 import React from 'react'
-import { SearchBar } from '../components/NavBar'
+import {Outlet, useLoaderData} from 'react-router-dom'
+import {NavBar} from '../components/NavBar'
 
-export const Root = () => (
-  <div>
-    <SearchBar />
-  </div>
-)
+export const Root = () => {
+  return (
+  <>
+    <NavBar />
+    <Outlet/>
+  </>
+) }

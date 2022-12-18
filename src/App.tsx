@@ -1,25 +1,20 @@
 import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { createGlobalStyle } from 'styled-components'
 import './App.css'
-import { NavBar } from './components/NavBar'
+import {GlobalStyle} from './global.css'
 import { Root } from './routes/Root'
+import {SearchResult, searchResultLoader} from './routes/SearchResult'
 
-const GlobalStyle = createGlobalStyle`
-* {
-  box-sizing: border-box;
-  font-family: Quicksand, sans-serif;
-}
-
-svg {
-  vertical-align: middle;
-}
-`
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
+    children: [{
+      path: 'search/:query/:page',
+      loader: searchResultLoader,
+      element: <SearchResult/>
+    }]
   },
 ])
 
@@ -27,7 +22,6 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <NavBar />
       <RouterProvider router={router} />
     </>
   )
