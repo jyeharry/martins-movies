@@ -3,41 +3,18 @@ import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { RxCross1 } from 'react-icons/rx'
 
-export interface Result {
-  poster_path: string
-  adult: boolean
-  overview: string
-  release_date: string
-  genre_ids: number[]
-  id: number
-  original_title: string
-  original_language: string
-  title: string
-  backdrop_path: string
-  popularity: number
-  vote_count: number
-  video: boolean
-  vote_average: number
-}
-
-export interface APIResponse {
-  page: number
-  results: Result[]
-  total_results: number
-  total_pages: number
-}
-
 const SearchDiv = styled.div<{ active?: boolean }>`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 99;
-  height: 60px;
+  height: 65px;
   padding: 0 20px;
   transition: all 0.5s ease;
   opacity: ${(props) => (props.active ? 1 : 0)};
   visibility: ${(props) => (props.active ? 'visible' : 'hidden')};
+  background-color: white;
 `
 
 const Input = styled.input`
@@ -46,7 +23,7 @@ const Input = styled.input`
   font-size: 20px;
   border: 0;
   padding: 10px 20px;
-  color: #666;
+  color: ${({ theme }) => theme.inputBackground};
   outline: 0;
 `
 
@@ -55,10 +32,16 @@ const Cross = styled(RxCross1)`
   transform: translate(-100%, -50%);
   top: 50%;
   cursor: pointer;
-  color: #666;
+  color: ${({ theme }) => theme.inputBackground};
 `
 
-export const SearchBar = ({ active, setSearchToggle }: { active?: boolean, setSearchToggle: Function }) => {
+export const SearchBar = ({
+  active,
+  setSearchToggle,
+}: {
+  active?: boolean
+  setSearchToggle: Function
+}) => {
   const [query, setQuery] = useState('')
   const navigate = useNavigate()
 

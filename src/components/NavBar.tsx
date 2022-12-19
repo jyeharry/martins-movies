@@ -1,35 +1,12 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { MdOutlinePersonOutline } from 'react-icons/md'
+import { FiMenu } from 'react-icons/fi'
 import { BiSearch } from 'react-icons/bi'
 import { GiEarthAmerica } from 'react-icons/gi'
 import styled from 'styled-components'
 import { IoIosArrowDown } from 'react-icons/io'
 import { SearchBar } from './SearchBar'
-
-const Nav = styled.nav`
-  padding: 0rem 2rem;
-  width: 100%;
-  display: flex;
-  background-color: peachpuff;
-  align-items: center;
-  flex-flow: row nowrap;
-  justify-content: flex-start;
-`
-
-const Link = styled.a`
-  text-decoration: none;
-  display: inline-block;
-  color: black;
-`
-
-const Brand = styled(Link)`
-  font-weight: bold;
-`
-
-const Main = styled.div`
-  display: flex;
-  flex-grow: 1;
-`
+import { Link } from 'react-router-dom'
 
 const NavList = styled.ul`
   flex-direction: row;
@@ -37,6 +14,41 @@ const NavList = styled.ul`
   list-style: none;
   justify-content: center;
   margin: 0.8rem 0;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.largeTablet}) {
+    flex-direction: row;
+  }
+`
+
+const mobileNavWidth = '27.5rem'
+
+const Nav = styled.nav`
+  padding: 0rem 2rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`
+
+const NavLink = styled(Link)`
+  text-decoration: none;
+  display: inline-block;
+  color: black;
+`
+
+const Brand = styled(NavLink)`
+  font-weight: bold;
+`
+
+const Main = styled.div`
+  flex-grow: 1;
+  align-items: center;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.largeTablet}) {
+    display: flex;
+    flex-basis: auto;
+  }
 `
 
 const NavMainList = styled(NavList)`
@@ -60,10 +72,10 @@ const NavListItem = ({
   isDropdown?: boolean
 }) => (
   <li>
-    <Link href="#">
+    <NavLink to="#">
       {children}
       {isDropdown && <IoIosArrowDown />}
-    </Link>
+    </NavLink>
   </li>
 )
 
@@ -78,12 +90,21 @@ const Button = styled.button`
 const Login = styled(Button)`
   font-weight: 600;
   transition: all 0.5s ease;
-  background-color: #9352b3;
+  cursor: pointer;
+  background-color: ${({ theme }) => theme.primary};
   vertical-align: middle;
   border-radius: 0.25rem;
   font-size: 14px;
   color: white;
   border: none;
+
+  &:hover {
+    filter: brightness(113%);
+  }
+`
+
+const PersonIcon = styled(MdOutlinePersonOutline)`
+  background-color: ${({ theme }) => theme.primary};
 `
 
 export const NavBar = () => {
@@ -92,7 +113,7 @@ export const NavBar = () => {
   return (
     <>
       <Nav>
-        <Brand href="#">
+        <Brand to="/">
           <h3>Martin's Movies</h3>
         </Brand>
         <Main>
@@ -112,7 +133,7 @@ export const NavBar = () => {
             </NavListItem>
             <NavListItem>
               <Login>
-                <MdOutlinePersonOutline /> LOGIN
+                <PersonIcon /> LOGIN
               </Login>
             </NavListItem>
           </ExtraNavList>
