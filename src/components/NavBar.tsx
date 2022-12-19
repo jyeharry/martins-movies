@@ -107,6 +107,12 @@ const PersonIcon = styled(MdOutlinePersonOutline)`
   background-color: ${({ theme }) => theme.primary};
 `
 
+const Separator = styled.div`
+  background-color: ${({ theme }) => theme.primary};
+  height: 60px;
+  margin-bottom: 60px;
+`
+
 export const NavBar = () => {
   const [searchToggle, setSearchToggle] = useState(false)
 
@@ -140,6 +146,7 @@ export const NavBar = () => {
         </Main>
       </Nav>
       <SearchBar setSearchToggle={setSearchToggle} active={searchToggle} />
+      <Separator/>
     </>
   )
 }

@@ -33,12 +33,6 @@ const CardRow = styled.div`
   margin: 0 -15px;
 `
 
-const Separator = styled.div`
-  background-color: ${({ theme }) => theme.primary};
-  height: 60px;
-  margin-bottom: 60px;
-`
-
 export const SearchResult = () => {
   const {
     movieData: { totalPages, page, movies },
@@ -60,7 +54,6 @@ export const SearchResult = () => {
 
   return (
     <>
-      <Separator />
       <Container>
         {cardRows}
         <PaginationLinks
